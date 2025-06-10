@@ -21,7 +21,11 @@
       background: linear-gradient(145deg, #1b0f3a, #140027);
       border-radius: 20px;
       padding: 2rem;
-      width: 300px;
+      width: 100%;
+      max-width: 340px;
+      min-width: 0;
+      box-sizing: border-box;
+      margin: 1.5rem;
       text-align: center;
       box-shadow: 0 0 20px #ff00ff55;
     }
@@ -33,6 +37,14 @@
     .shot-name {
       font-size: 1.5rem;
       margin-top: 1rem;
+    }
+
+    .shot-price {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+      font-weight: bold;
+      color: yellow;
+      display: none;
     }
 
     .btn {
@@ -61,8 +73,12 @@
   <div class="app">
     <div class="shot-icon" id="shotIcon">😈</div>
     <div class="shot-name" id="shotName">SHOT MALDITO</div>
-    <button class="btn btn-secondary" onclick="generarShot()">GENERAR SHOT</button>
-    <button class="btn btn-primary" onclick="aceptarShot()">¡LO ACEPTO!</button>
+    <div class="shot-price" id="shotPrice">S/1.00</div>
+    <button class="btn btn-secondary" onclick="generarShot()">SWIPEA</button>
+    <button class="btn btn-primary" onclick="aceptarShot()">¡ACEPTO EL MATCH!</button>
+  </div>
+  <div style="width:100%;display:flex;justify-content:center;align-items:center;margin-top:1.5rem;">
+    <img src="logo.png" alt="Logo Lounge" style="max-width:120px;max-height:60px;width:auto;height:auto;" />
   </div>
 
   <script>
@@ -82,6 +98,14 @@
       const random = shots[Math.floor(Math.random() * shots.length)];
       document.getElementById('shotName').textContent = random.nombre;
       document.getElementById('shotIcon').textContent = random.icono;
+      // Mostrar precio solo para cócteles de S/1.00
+      const priceDiv = document.getElementById('shotPrice');
+      if (['PISCO SOUR', 'MOJITO', 'CUBA LIBRE'].includes(random.nombre)) {
+        priceDiv.textContent = 'S/1.00';
+        priceDiv.style.display = 'block';
+      } else {
+        priceDiv.style.display = 'none';
+      }
     }
 
     function aceptarShot() {

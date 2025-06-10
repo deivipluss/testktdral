@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filtro de Shots</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial Black', sans-serif;
+      background: radial-gradient(#120026, #000);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .app {
+      background: linear-gradient(145deg, #1b0f3a, #140027);
+      border-radius: 20px;
+      padding: 2rem;
+      width: 300px;
+      text-align: center;
+      box-shadow: 0 0 20px #ff00ff55;
+    }
+
+    .shot-icon {
+      font-size: 5rem;
+    }
+
+    .shot-name {
+      font-size: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .btn {
+      margin-top: 1rem;
+      padding: 1rem;
+      width: 100%;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: yellow;
+      color: black;
+      font-weight: bold;
+    }
+
+    .btn-secondary {
+      background: #333;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="shot-icon" id="shotIcon">😈</div>
+    <div class="shot-name" id="shotName">SHOT MALDITO</div>
+    <button class="btn btn-secondary" onclick="generarShot()">GENERAR SHOT</button>
+    <button class="btn btn-primary" onclick="aceptarShot()">¡LO ACEPTO!</button>
+  </div>
+
+  <script>
+    const shots = [
+      { nombre: 'SHOT MALDITO', icono: '😈', accion: '¡Haz algo loco para ganarlo gratis!' },
+      { nombre: 'SHOT PICANTE', icono: '🌶️', accion: 'Precio especial al instante' },
+      { nombre: 'SHOT DULZÓN', icono: '🍬', accion: 'Precio especial' },
+      { nombre: 'SHOT MISTERIOSO', icono: '❓', accion: '¡Sorpresa en la barra!' },
+      { nombre: 'SHOT DE FUEGO', icono: '🔥', accion: 'Solo para valientes' },
+      { nombre: 'SHOT LUNÁTICO', icono: '🌕', accion: 'Precio especial esta noche' },
+      { nombre: 'SHOT DIABÓLICO', icono: '👹', accion: '¡Grita para ganarlo gratis!' },
+      { nombre: 'SHOT RELÁMPAGO', icono: '⚡', accion: 'Corre al bar en 10s para el premio' },
+      { nombre: 'SHOT FANTASMA', icono: '👻', accion: 'Solo visible para los valientes' },
+      { nombre: 'SHOT GALÁCTICO', icono: '🚀', accion: 'Viaje de sabor interplanetario' }
+    ];
+
+    function generarShot() {
+      const random = shots[Math.floor(Math.random() * shots.length)];
+      document.getElementById('shotName').textContent = random.nombre;
+      document.getElementById('shotIcon').textContent = random.icono;
+    }
+
+    function aceptarShot() {
+      const nombre = document.getElementById('shotName').textContent;
+      const shot = shots.find(s => s.nombre === nombre);
+      if (shot) {
+        alert(`${shot.accion}`);
+      } else {
+        alert('¡Error al aceptar el shot!');
+      }
+    }
+  </script>
+</body>
+</html>

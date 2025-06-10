@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Filtro de Shots</title>
+  <title>Tinder en #ElLounge - KTDRAL TEST</title>
   <style>
     body {
       margin: 0;
@@ -64,8 +64,17 @@
     }
 
     .btn-secondary {
-      background: #333;
+      background: #a000ff;
       color: white;
+      box-shadow: 0 0 10px #ff00ff55;
+      animation: bounce 1.2s infinite alternate;
+      transition: transform 0.2s;
+    }
+
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      60% { transform: translateY(-8px) scale(1.05); }
+      100% { transform: translateY(0); }
     }
 
     /* Estilos para el modal */
@@ -114,7 +123,8 @@
     <div class="shot-icon" id="shotIcon">😈</div>
     <div class="shot-name" id="shotName">HOY TE TOCA</div>
     <div class="shot-price" id="shotPrice">S/1.00</div>
-    <button class="btn btn-secondary" onclick="generarShot()">SWIPEA</button>
+    <button class="btn btn-secondary" id="swipeaBtn" onclick="generarShot()">SWIPEA</button>
+    <button class="btn btn-primary" id="aceptoBtn" onclick="aceptarShot()" style="display:none;">¡ACEPTO EL MATCH!</button>
     <div style="width:100%;display:flex;justify-content:center;align-items:center;margin-top:1.5rem;">
       <img src="logo.png" alt="Logo Lounge" style="max-width:120px;max-height:60px;width:auto;height:auto;" />
     </div>
@@ -146,14 +156,24 @@
       const random = shots[Math.floor(Math.random() * shots.length)];
       document.getElementById('shotName').textContent = random.nombre;
       document.getElementById('shotIcon').textContent = random.icono;
-      // Mostrar precio solo para cócteles de S/1.00
+      // Mostrar precio solo para cócteles de S/1.00 y Old Times + Pepsi
       const priceDiv = document.getElementById('shotPrice');
-      if (['PISCO SOUR', 'MOJITO', 'CUBA LIBRE'].includes(random.nombre)) {
+      if (["PISCO SOUR", "MOJITO", "CUBA LIBRE"].includes(random.nombre)) {
         priceDiv.textContent = 'S/1.00';
+        priceDiv.style.display = 'block';
+      } else if (random.nombre === 'OLD TIMES + PEPSI') {
+        priceDiv.textContent = 'S/30.00';
         priceDiv.style.display = 'block';
       } else {
         priceDiv.style.display = 'none';
       }
+      // Mostrar botón de aceptar match
+      document.getElementById('aceptoBtn').style.display = 'block';
+    }
+
+    // Al cargar la pantalla inicial, ocultar el botón de aceptar match
+    window.onload = function() {
+      document.getElementById('aceptoBtn').style.display = 'none';
     }
 
     function aceptarShot() {

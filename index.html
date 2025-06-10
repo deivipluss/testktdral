@@ -67,8 +67,10 @@
       background: #a000ff;
       color: white;
       box-shadow: 0 0 10px #ff00ff55;
-      animation: bounce 1.2s infinite alternate;
       transition: transform 0.2s;
+    }
+    .bounce-effect {
+      animation: bounce 1.2s infinite alternate;
     }
 
     @keyframes bounce {
@@ -169,11 +171,14 @@
       }
       // Mostrar botón de aceptar match
       document.getElementById('aceptoBtn').style.display = 'block';
+      // Quitar animación de rebote al botón SWIPEA
+      document.getElementById('swipeaBtn').classList.remove('bounce-effect');
     }
 
-    // Al cargar la pantalla inicial, ocultar el botón de aceptar match
+    // Al cargar la pantalla inicial, ocultar el botón de aceptar match y poner rebote en SWIPEA
     window.onload = function() {
       document.getElementById('aceptoBtn').style.display = 'none';
+      document.getElementById('swipeaBtn').classList.add('bounce-effect');
     }
 
     function aceptarShot() {

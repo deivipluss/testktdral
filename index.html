@@ -125,6 +125,7 @@
     <div class="shot-icon" id="shotIcon">😈</div>
     <div class="shot-name" id="shotName">HOY TE TOCA</div>
     <div class="shot-price" id="shotPrice">S/1.00</div>
+    <div class="shot-price" id="shotRestriction" style="font-size:0.95rem;margin-top:0.2rem;font-weight:normal;color:#ffb3ff;display:none;">Válido hasta las 12:30PM</div>
     <button class="btn btn-secondary" id="swipeaBtn" onclick="generarShot()">SWIPEA</button>
     <button class="btn btn-primary" id="aceptoBtn" onclick="aceptarShot()" style="display:none;">¡ACEPTO EL MATCH!</button>
     <div style="width:100%;display:flex;justify-content:center;align-items:center;margin-top:1.5rem;">
@@ -151,7 +152,7 @@
       { nombre: 'UN BESO DEL ANIMADOR', icono: '💋', accion: '¡En la mejilla o full show!' },
       { nombre: 'ESCOGES LAS PRÓXIMAS 3 CANCIONES DEL DJ', icono: '🎶', accion: '¡Tú eliges la música!' },
       { nombre: 'SALUDOS DEL ANIMADOR', icono: '🎤', accion: '¡Saludos especiales en vivo!' },
-      { nombre: '-20% en toda la carta', icono: '💸', accion: 'Descuento aplicado a tu cuenta (válido hasta las 12:30PM)' }
+      { nombre: '-20% en toda la carta', icono: '💸', accion: 'Descuento aplicado a tu cuenta (válido hasta las 12:30AM)' }
     ];
 
     function generarShot() {
@@ -160,14 +161,21 @@
       document.getElementById('shotIcon').textContent = random.icono;
       // Mostrar precio solo para cócteles de S/1.00 y Old Times + Pepsi
       const priceDiv = document.getElementById('shotPrice');
+      const restrictionDiv = document.getElementById('shotRestriction');
       if (["PISCO SOUR", "MOJITO", "CUBA LIBRE"].includes(random.nombre)) {
         priceDiv.textContent = 'S/1.00';
         priceDiv.style.display = 'block';
+        restrictionDiv.style.display = 'none';
       } else if (random.nombre === 'OLD TIMES + PEPSI') {
         priceDiv.textContent = 'S/30.00';
         priceDiv.style.display = 'block';
+        restrictionDiv.style.display = 'none';
+      } else if (random.nombre === '-20% en toda la carta') {
+        priceDiv.style.display = 'none';
+        restrictionDiv.style.display = 'block';
       } else {
         priceDiv.style.display = 'none';
+        restrictionDiv.style.display = 'none';
       }
       // Mostrar botón de aceptar match
       document.getElementById('aceptoBtn').style.display = 'block';
@@ -175,10 +183,11 @@
       document.getElementById('swipeaBtn').classList.remove('bounce-effect');
     }
 
-    // Al cargar la pantalla inicial, ocultar el botón de aceptar match y poner rebote en SWIPEA
+    // Al cargar la pantalla inicial, ocultar el botón de aceptar match y mostrar restricción solo si corresponde
     window.onload = function() {
       document.getElementById('aceptoBtn').style.display = 'none';
       document.getElementById('swipeaBtn').classList.add('bounce-effect');
+      document.getElementById('shotRestriction').style.display = 'none';
     }
 
     function aceptarShot() {

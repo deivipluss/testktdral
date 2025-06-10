@@ -196,6 +196,21 @@
 
     function cerrarModalMatch() {
       document.getElementById('modalMatch').style.display = 'none';
+      // Bloquear la app para que no se pueda volver a usar
+      const appDiv = document.querySelector('.app');
+      const overlay = document.createElement('div');
+      overlay.style.position = 'fixed';
+      overlay.style.top = '0';
+      overlay.style.left = '0';
+      overlay.style.width = '100vw';
+      overlay.style.height = '100vh';
+      overlay.style.background = 'rgba(0,0,0,0.92)';
+      overlay.style.zIndex = '2000';
+      overlay.style.display = 'flex';
+      overlay.style.justifyContent = 'center';
+      overlay.style.alignItems = 'center';
+      overlay.innerHTML = '<div style="color:white;font-size:1.4rem;font-weight:bold;text-align:center;">¡Gracias por participar!<br><span style="font-size:2.5rem;">🎉</span></div>';
+      document.body.appendChild(overlay);
     }
   </script>
 </body>
